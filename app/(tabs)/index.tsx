@@ -1,12 +1,11 @@
 import SearchBar from '@/components/SearchBar';
-import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import WeatherDataCard from '@/components/WeatherDataCard';
 import WeatherMap from '@/components/WeatherMap';
 import { NasaApiService } from '@/services/nasaApi';
 import * as Location from 'expo-location';
 import React, { useState } from 'react';
-import { Alert, ScrollView, StyleSheet } from 'react-native';
+import { Alert, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
 interface LocationData {
   latitude: number;
@@ -144,52 +143,52 @@ export default function HomeScreen() {
   };
 
   return (
-    <ThemedView style={styles.container}>
-      <ScrollView 
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Barra de búsqueda */}
-        <SearchBar 
-          onSearch={handleSearch}
-          onLocationPress={handleLocationPress}
-        />
-        
-        {/* Contenedor de datos climáticos */}
-        <WeatherDataCard 
-          data={weatherData}
-          loading={loading}
-        />
-        
-        {/* Mapa de ubicación */}
-        <WeatherMap 
-          location={selectedLocation}
-          onLocationChange={handleLocationChange}
-          loading={loading}
-        />
-        
-        {/* Información adicional */}
-        <ThemedView style={styles.infoContainer}>
-          <ThemedText style={styles.infoTitle}>
-            🌍 Tlaloc - Datos Climáticos de la NASA
-          </ThemedText>
-          <ThemedText style={styles.infoText}>
-            Explora datos de observación de la Tierra y obtén información sobre 
-            condiciones climáticas específicas en cualquier ubicación del mundo.
-          </ThemedText>
-        </ThemedView>
-      </ScrollView>
-    </ThemedView>
+    <SafeAreaView style={styles.safeArea}>
+      <ThemedView style={styles.container}>
+        <ScrollView 
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Barra de búsqueda */}
+          <SearchBar 
+            onSearch={handleSearch}
+            onLocationPress={handleLocationPress}
+          />
+          
+          {/* Contenedor de datos climáticos */}
+          <WeatherDataCard 
+            data={weatherData}
+            loading={loading}
+          />
+          
+          {/* Mapa de ubicación */}
+          <WeatherMap 
+            location={selectedLocation}
+            onLocationChange={handleLocationChange}
+            loading={loading}
+          />
+          {/* Información adicional */}
+        </ScrollView>
+      </ThemedView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+  },
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
   scrollView: {
     flex: 1,
+  },
+  scrollContent: {
+    paddingBottom: 20,
   },
   infoContainer: {
     margin: 16,
