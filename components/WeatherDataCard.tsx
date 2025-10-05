@@ -50,7 +50,7 @@ export default function WeatherDataCard({ data, loading = false }: WeatherDataCa
     <ThemedView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.locationContainer}>
-          <Ionicons name="location-outline" size={16} color="#007AFF" />
+          <Ionicons name="location-outline" size={16} color="#0A84FF" />
           <ThemedText style={styles.locationText}>{data.location}</ThemedText>
         </View>
         {data.lastUpdated && (
@@ -68,10 +68,10 @@ export default function WeatherDataCard({ data, loading = false }: WeatherDataCa
           <ThemedText style={styles.temperatureUnit}>C</ThemedText>
         </View>
         <View style={styles.weatherIcon}>
-          <Ionicons 
-            name={getWeatherIcon(data.temperature)} 
-            size={28} 
-            color={getTemperatureColor(data.temperature)} 
+          <Ionicons
+            name={getWeatherIcon(data.temperature)}
+            size={28}
+            color={getTemperatureColor(data.temperature)}
           />
         </View>
       </View>
@@ -79,12 +79,12 @@ export default function WeatherDataCard({ data, loading = false }: WeatherDataCa
       <View style={styles.additionalData}>
         {data.humidity !== undefined && (
           <View style={styles.dataItem}>
-            <Ionicons name="water-outline" size={16} color="#4FC3F7" />
+            <Ionicons name="water-outline" size={16} color="#64B5F6" />
             <ThemedText style={styles.dataLabel}>Humedad</ThemedText>
             <ThemedText style={styles.dataValue}>{data.humidity}%</ThemedText>
           </View>
         )}
-        
+
         {data.windSpeed !== undefined && (
           <View style={styles.dataItem}>
             <Ionicons name="leaf-outline" size={16} color="#81C784" />
@@ -92,7 +92,7 @@ export default function WeatherDataCard({ data, loading = false }: WeatherDataCa
             <ThemedText style={styles.dataValue}>{data.windSpeed} km/h</ThemedText>
           </View>
         )}
-        
+
         {data.airQuality !== undefined && (
           <View style={styles.dataItem}>
             <Ionicons name="leaf-outline" size={16} color={getAirQualityColor(data.airQuality)} />
@@ -139,12 +139,12 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     borderRadius: 16,
     padding: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1C1C1E',
     ...Platform.select({
       ios: {
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.3,
         shadowRadius: 4,
       },
       android: {
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   loadingText: {
-    color: '#666',
+    color: '#FFFFFF',
     fontSize: 16,
   },
   emptyContainer: {
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     paddingVertical: 32,
   },
   emptyText: {
-    color: '#999',
+    color: '#8E8E93',
     fontSize: 16,
     textAlign: 'center',
     marginTop: 12,
@@ -184,11 +184,11 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontSize: 16,
     fontWeight: '600',
-    color: '#333',
+    color: '#FFFFFF',
   },
   lastUpdated: {
     fontSize: 12,
-    color: '#666',
+    color: '#8E8E93',
   },
   mainData: {
     flexDirection: 'row',
@@ -204,13 +204,13 @@ const styles = StyleSheet.create({
   temperature: {
     fontSize: 36,
     fontWeight: '300',
-    color: '#333',
+    color: '#FFFFFF',
     lineHeight: 40,
   },
   temperatureUnit: {
     fontSize: 18,
     fontWeight: '300',
-    color: '#666',
+    color: '#8E8E93',
     marginLeft: 4,
   },
   weatherIcon: {
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   },
   dataLabel: {
     fontSize: 11,
-    color: '#666',
+    color: '#8E8E93',
     marginTop: 6,
     textAlign: 'center',
     fontWeight: '500',
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
   dataValue: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#333',
+    color: '#FFFFFF',
     marginTop: 4,
   },
 });

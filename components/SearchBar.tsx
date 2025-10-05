@@ -16,10 +16,10 @@ interface SearchBarProps {
   placeholder?: string;
 }
 
-export default function SearchBar({ 
-  onSearch, 
-  onLocationPress, 
-  placeholder = "Buscar ubicación..." 
+export default function SearchBar({
+  onSearch,
+  onLocationPress,
+  placeholder = "Buscar ubicación..."
 }: SearchBarProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -32,39 +32,39 @@ export default function SearchBar({
   return (
     <ThemedView style={styles.container}>
       <View style={styles.searchContainer}>
-        <Ionicons 
-          name="search" 
-          size={20} 
-          color="#666" 
+        <Ionicons
+          name="search"
+          size={20}
+          color="#8E8E93"
           style={styles.searchIcon}
         />
         <TextInput
           style={styles.textInput}
           placeholder={placeholder}
-          placeholderTextColor="#999"
+          placeholderTextColor="#8E8E93"
           value={searchQuery}
           onChangeText={setSearchQuery}
           onSubmitEditing={handleSearch}
           returnKeyType="search"
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity 
+          <TouchableOpacity
             onPress={() => {
               setSearchQuery('');
               onSearch('');
             }}
             style={styles.clearButton}
           >
-            <Ionicons name="close-circle" size={20} color="#666" />
+            <Ionicons name="close-circle" size={20} color="#8E8E93" />
           </TouchableOpacity>
         )}
       </View>
-      
-      <TouchableOpacity 
+
+      <TouchableOpacity
         onPress={onLocationPress}
         style={styles.locationButton}
       >
-        <Ionicons name="location" size={20} color="#007AFF" />
+        <Ionicons name="location" size={20} color="#0A84FF" />
         <ThemedText style={styles.locationText}>Mi ubicación</ThemedText>
       </TouchableOpacity>
     </ThemedView>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#2C2C2E',
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 8,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
       ios: {
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.3,
         shadowRadius: 2,
       },
       android: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     fontSize: 16,
-    color: '#333',
+    color: '#FFFFFF',
     paddingVertical: Platform.OS === 'ios' ? 4 : 0,
   },
   clearButton: {
@@ -115,14 +115,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#E3F2FD',
+    backgroundColor: '#1C1C1E',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: '#3A3A3C',
   },
   locationText: {
     marginLeft: 6,
-    color: '#007AFF',
+    color: '#0A84FF',
     fontWeight: '500',
   },
 });

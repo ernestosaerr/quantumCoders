@@ -25,10 +25,10 @@ interface WeatherMapProps {
   loading?: boolean;
 }
 
-export default function WeatherMap({ 
-  location, 
-  onLocationChange, 
-  loading = false 
+export default function WeatherMap({
+  location,
+  onLocationChange,
+  loading = false
 }: WeatherMapProps) {
   const mapRef = useRef<MapView>(null);
 
@@ -99,11 +99,11 @@ export default function WeatherMap({
           </MapView>
         ) : (
           <View style={styles.mapPlaceholder}>
-            <Ionicons name="map-outline" size={64} color="#007AFF" />
+            <Ionicons name="map-outline" size={64} color="#0A84FF" />
             <ThemedText style={styles.mapPlaceholderText}>
               Selecciona una ubicación para ver el mapa
             </ThemedText>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.getLocationButton}
               onPress={getCurrentLocation}
             >
@@ -117,19 +117,19 @@ export default function WeatherMap({
 
         {/* Botones de control */}
         <View style={styles.controlsContainer}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.controlButton}
             onPress={getCurrentLocation}
           >
-            <Ionicons name="locate" size={20} color="#007AFF" />
+            <Ionicons name="locate" size={20} color="#0A84FF" />
           </TouchableOpacity>
 
           {location && (
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.controlButton}
               onPress={openInMaps}
             >
-              <Ionicons name="navigate" size={20} color="#007AFF" />
+              <Ionicons name="navigate" size={20} color="#0A84FF" />
             </TouchableOpacity>
           )}
         </View>
@@ -143,7 +143,7 @@ export default function WeatherMap({
 
       {location && (
         <View style={styles.locationInfo}>
-          <Ionicons name="location" size={16} color="#007AFF" />
+          <Ionicons name="location" size={16} color="#0A84FF" />
           <ThemedText style={styles.locationText}>{location.name}</ThemedText>
         </View>
       )}
@@ -152,17 +152,17 @@ export default function WeatherMap({
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, marginHorizontal: 16, marginBottom: 16, borderRadius: 16, overflow: 'hidden', backgroundColor: '#FFFFFF' },
+  container: { flex: 1, marginHorizontal: 16, marginBottom: 16, borderRadius: 16, overflow: 'hidden', backgroundColor: '#1C1C1E' },
   mapContainer: { flex: 1, position: 'relative' },
-  map: { flex: 1, borderRadius: 12, margin: 8, backgroundColor: '#F8F9FA', minHeight: 300 },
-  mapPlaceholder: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F8F9FA', borderRadius: 12, margin: 8, padding: 20 },
-  mapPlaceholderText: { fontSize: 18, fontWeight: '600', color: '#007AFF', marginTop: 16, textAlign: 'center', marginBottom: 20 },
-  getLocationButton: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#007AFF', paddingHorizontal: 20, paddingVertical: 12, borderRadius: 25 },
+  map: { flex: 1, borderRadius: 12, margin: 8, backgroundColor: '#2C2C2E', minHeight: 300 },
+  mapPlaceholder: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#2C2C2E', borderRadius: 12, margin: 8, padding: 20 },
+  mapPlaceholderText: { fontSize: 18, fontWeight: '600', color: '#0A84FF', marginTop: 16, textAlign: 'center', marginBottom: 20 },
+  getLocationButton: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#0A84FF', paddingHorizontal: 20, paddingVertical: 12, borderRadius: 25 },
   getLocationText: { marginLeft: 8, fontSize: 16, fontWeight: '600', color: '#FFFFFF' },
   controlsContainer: { position: 'absolute', top: 16, right: 16, flexDirection: 'column', gap: 8 },
-  controlButton: { backgroundColor: '#FFFFFF', borderRadius: 20, width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
-  loadingOverlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(255,255,255,0.8)', justifyContent: 'center', alignItems: 'center' },
-  loadingText: { color: '#666', fontSize: 16 },
-  locationInfo: { flexDirection: 'row', alignItems: 'center', padding: 12, backgroundColor: '#F5F5F5', borderTopWidth: 1, borderTopColor: '#E0E0E0' },
-  locationText: { marginLeft: 6, fontSize: 14, color: '#333', fontWeight: '500' },
+  controlButton: { backgroundColor: '#2C2C2E', borderRadius: 20, width: 40, height: 40, justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: '#3A3A3C' },
+  loadingOverlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'center', alignItems: 'center' },
+  loadingText: { color: '#FFFFFF', fontSize: 16 },
+  locationInfo: { flexDirection: 'row', alignItems: 'center', padding: 12, backgroundColor: '#2C2C2E', borderTopWidth: 1, borderTopColor: '#3A3A3C' },
+  locationText: { marginLeft: 6, fontSize: 14, color: '#FFFFFF', fontWeight: '500' },
 });
