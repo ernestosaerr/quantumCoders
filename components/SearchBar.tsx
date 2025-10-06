@@ -7,18 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
-  onLocationPress: () => void;
   placeholder?: string;
 }
 
 export default function SearchBar({
   onSearch,
-  onLocationPress,
   placeholder = "Buscar ubicación..."
 }: SearchBarProps) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -59,14 +56,6 @@ export default function SearchBar({
           </TouchableOpacity>
         )}
       </View>
-
-      <TouchableOpacity
-        onPress={onLocationPress}
-        style={styles.locationButton}
-      >
-        <Ionicons name="location" size={20} color="#0A84FF" />
-        <ThemedText style={styles.locationText}>Mi ubicación</ThemedText>
-      </TouchableOpacity>
     </ThemedView>
   );
 }
@@ -110,21 +99,5 @@ const styles = StyleSheet.create({
   clearButton: {
     marginLeft: 8,
     padding: 4,
-  },
-  locationButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#1C1C1E',
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderWidth: 1,
-    borderColor: '#3A3A3C',
-  },
-  locationText: {
-    marginLeft: 6,
-    color: '#0A84FF',
-    fontWeight: '500',
   },
 });

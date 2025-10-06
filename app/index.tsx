@@ -1,11 +1,13 @@
 import SearchBar from '@/components/SearchBar';
+import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import WeatherDataCard from '@/components/WeatherDataCard';
 import WeatherMap from '@/components/WeatherMap';
 import { NasaApiService } from '@/services/nasaApi';
-import * as Location from 'expo-location';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { Alert, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface LocationData {
     latitude: number;
@@ -26,6 +28,7 @@ export default function HomeScreen() {
     const [selectedLocation, setSelectedLocation] = useState<LocationData | null>(null);
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     const handleSearch = async (query: string) => {
         if (!query.trim()) return;
@@ -66,65 +69,6 @@ export default function HomeScreen() {
         }
     };
 
-    const handleLocationPress = async () => {
-        setLoading(true);
-        try {
-            console.log('=== SOLICITANDO PERMISOS DE UBICACIÓN ===');
-
-            // Solicitar permisos de ubicación
-            const { status } = await Location.requestForegroundPermissionsAsync();
-
-            if (status !== 'granted') {
-                Alert.alert(
-                    'Permisos de ubicación',
-                    'Se necesitan permisos de ubicación para obtener datos climáticos de tu área actual.'
-                );
-                return;
-            }
-
-            console.log('=== OBTENIENDO UBICACIÓN ACTUAL ===');
-
-            // Obtener ubicación actual
-            const location = await Location.getCurrentPositionAsync({
-                accuracy: Location.Accuracy.Balanced,
-            });
-
-            console.log('=== UBICACIÓN OBTENIDA ===');
-            console.log('Coordenadas:', {
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-                accuracy: location.coords.accuracy
-            });
-
-            // Crear objeto de ubicación
-            const currentLocation: LocationData = {
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-                name: 'Mi ubicación actual'
-            };
-
-            console.log('=== UBICACIÓN PROCESADA ===');
-            console.log('Location data:', currentLocation);
-
-            setSelectedLocation(currentLocation);
-
-            // Obtener datos climáticos para la ubicación actual
-            console.log('=== OBTENIENDO DATOS CLIMÁTICOS PARA UBICACIÓN ACTUAL ===');
-            const weatherData = await NasaApiService.getTemperatureData(currentLocation);
-            console.log('=== DATOS CLIMÁTICOS OBTENIDOS ===');
-            console.log('Weather data:', weatherData);
-            setWeatherData(weatherData);
-
-        } catch (error) {
-            console.error('Error en geolocalización:', error);
-            Alert.alert(
-                'Error de ubicación',
-                'No se pudo obtener tu ubicación actual. Verifica que los servicios de ubicación estén habilitados.'
-            );
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleLocationChange = async (location: LocationData) => {
         setSelectedLocation(location);
@@ -153,8 +97,18 @@ export default function HomeScreen() {
                     {/* Barra de búsqueda */}
                     <SearchBar
                         onSearch={handleSearch}
-                        onLocationPress={handleLocationPress}
                     />
+
+                    {/* Botón de comparación */}
+                    <TouchableOpacity
+                        style={styles.comparisonButton}
+                        onPress={() => router.push('/comparison')}
+                    >
+                        <Ionicons name="analytics" size={20} color="#FFFFFF" />
+                        <ThemedText style={styles.comparisonButtonText}>
+                            Comparar Ubicaciones
+                        </ThemedText>
+                    </TouchableOpacity>
 
                     {/* Contenedor de datos climáticos */}
                     <WeatherDataCard
@@ -208,5 +162,22 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#FFFFFF',
         lineHeight: 20,
+    },
+    comparisonButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 16,
+        marginVertical: 8,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        backgroundColor: '#0A84FF',
+        borderRadius: 12,
+    },
+    comparisonButtonText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#FFFFFF',
+        marginLeft: 8,
     },
 });
